@@ -4,16 +4,17 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var messages = [];
 
-app.use(express.static("."));
+app.use(express.static('.'));
 app.get('/', function (req, res) {
     res.redirect('index.html');
 });
 server.listen(3000);
 
 io.on('connection', function (socket) {
-    io.sockets.emit("kpav");
+    io.sockets.emit('kpav');
 
-io.on("aaa", function(){
-    console.log(frameCount);
-})
+    socket.on('asa', function (data) {
+        io.sockets.emit('aaa', data);
+    })
 });
+
