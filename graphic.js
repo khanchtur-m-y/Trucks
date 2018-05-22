@@ -1,12 +1,11 @@
 var matrix = [];
-
-var side = 50;
-var matrixSize = 10;
+var side = 25;
+var matrixSize = 20;
 
 function setup() {
     createCanvas((side * matrixSize) + 1, (side * matrixSize) + 1);
     background('#acacac');
-    frameRate(1);
+    frameRate(20);
 	for(var y = 0; y < matrixSize; y++){
 		matrix[y] = [];
 		for(var x = 0; x < matrixSize; x++){

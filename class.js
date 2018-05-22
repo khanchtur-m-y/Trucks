@@ -1,11 +1,13 @@
-
-
 class Player{
-	constructor(color){
-		this.y;
-		this.x;
+	constructor(y, x, color){		
+		this.y = y;
+		this.x = x;
 		this.loaded = false;
 		this.color = color;
+	}
+	
+	appear(){
+		matrix[this.y][this.x] = 3;
 	}
 	
 	checkCollision(_y, _x){

@@ -9,6 +9,8 @@ app.get('/', function (req, res) {
     res.redirect('index.html');
 });
 server.listen(3000);
+console.log("server is listening");
+
 
 var colors = [
 	[    "red",   "green",    "cyan",  "purple"],
@@ -21,13 +23,11 @@ var idNickIndex = 0;
 io.on('connection', function (socket) {
 	idNickArr[0][idNickIndex] = socket.id;
 	
-	socket.on("nickname", function(data){
+	socket.on("nickname", function(data){		
 		idNickArr[1][idNickIndex++] = data;
 		if(idNickIndex == 3){
 			for(var i = 0; i < 4; i++){
-				for(var a = 0; a < 4; a++){
-					io.to(idNickArr[0][a]).emit("getColor", colors[1][a]);
-				}
+				io.to(idNickArr[0][i]).emit("getColor", colors[1][i]);
 			}
 		}
 	});
