@@ -10,11 +10,30 @@ app.get('/', function (req, res) {
 });
 server.listen(3000);
 
-io.on('connection', function (socket) {
-    io.sockets.emit('kpav');
+var colors = [
+	[    "red",   "green",    "cyan",  "purple"],
+	["#FF0000", "#33FF33", "#00FFFF", "#8000FF"]
+	];
+	
+var idNickArr = [[/*id*/], [/*nick*/]];
+var idNickIndex = 0;
 
-    socket.on('asa', function (data) {
-        io.sockets.emit('aaa', data);
-    })
+io.on('connection', function (socket) {
+	idNickArr[0][idNickIndex] = socket.id;
+	
+	socket.on("nickname", function(data){
+		idNickArr[1][idNickIndex++] = data;
+		if(idNickIndex == 3){
+			for(var i = 0; i < 4; i++){
+				for(var a = 0; a < 4; a++){
+					io.to(idNickArr[0][a]).emit("getColor", colors[1][a]);
+				}
+			}
+		}
+	});
+	
+    socket.on('directionFromClient', function (data) {
+        io.sockets.emit('directionFromServer', data);
+    });
 });
 
