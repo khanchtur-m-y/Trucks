@@ -1,30 +1,28 @@
 function main() {
-	var nick = prompt("choose your nickname");
 	var socket = io.connect('http://localhost:3000');
+	
+	var nick = prompt("choose your nickname");
 	socket.emit("nickname", nick);
-
-	var info = new Info();
-
-	document.addEventListener('keydown', function (event) {
-		info.getDirections(event.key);
-		socket.emit('directionFromClient', info);
-	});
-
-	socket.on('directionFromServer', function (data) {
-		plArr[data.index].move(data.directionHor, data.directionVert);
-	});
-
-	socket.on("getColor", function (data) {
-		plArr[data.index] = new Player(data.color, data.index);
-		plArr[data.index].appear();
-		plInd = data.index;
+	
+	var info = {pressed_key: "", i: 0};
+	
+	socket.on("setup", function (data) {
+		info.i = data.index;
+		matrixClient = data.mtrx;
 		p.innerHTML = "connected as " + data.nick;
 	});
 
+	document.addEventListener('keydown', function (event) {
+		info.pressed_key = event.key;
+		socket.emit('directionFromClient', info);
+	});
+
 	socket.on("getMatrix", function (data) {
-		matrix = data.matrixI;
-		side = data.sideI
-		matrixSize = data.matrixSizeI;
+		matrixClient = data.matrixI;
+	});
+	
+	socket.on("player_left", function(data){
+		console.log(data + " has left");
 	});
 }
 

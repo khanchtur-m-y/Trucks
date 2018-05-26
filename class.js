@@ -7,7 +7,7 @@ class Info {
 	}
 
 	getDirections(pressed_key) {
-		switch (pressed_key) {
+		switch (matrixGiven, pressed_key) {
 
 			case "ArrowUp": //38
 				this.directionVert = -1;
