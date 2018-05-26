@@ -1,48 +1,53 @@
 var matrix = [];
-var side = 25;
-var matrixSize = 20;
+var side;
+var matrixSize;
+var plArr = [];
+var p = document.getElementById("pWait");
 
 function setup() {
-    createCanvas((side * matrixSize) + 1, (side * matrixSize) + 1);
-    background('#acacac');
-    frameRate(20);
-	for(var y = 0; y < matrixSize; y++){
-		matrix[y] = [];
-		for(var x = 0; x < matrixSize; x++){
-			matrix[y][x] = 0;
-		}
-	}
-
-	for(var i = 0; i < 10; i ++){
-		matrix[Math.floor(random(0, matrixSize))][Math.floor(random(0, matrixSize))] = 1;
-	}
-	
-	for(var i = 0; i < 10; i ++){
-		matrix[Math.floor(random(0, matrixSize))][Math.floor(random(0, matrixSize))] = 2;
-	}
+	createCanvas((side * matrixSize) + 1, (side * matrixSize) + 1);
+	background('#acacac');
+	frameRate(20);
 }
 
 function draw() {
-	for(var y = 0; y < matrix.length; y++){
-		for (var x = 0; x < matrix[0].length; x++){
-			switch(matrix[y][x]){
-				case 0: // grass
+	for (var y = 0; y < matrix.length; y++) {
+		for (var x = 0; x < matrix[0].length; x++) {
+			switch (matrix[y][x]) {
+				case 0:
+					fill('red');
+					break;
+
+				case 1:
+					fill('limeGreen');
+					break;
+
+				case 2:
+					fill('cyan');
+					break;
+
+				case 3:
+					fill('purple');
+					break;
+
+				case 4:
 					fill('green');
-				break;
-				
-				case 1://gold
+					break;
+
+				case 5:
 					fill('gold');
-				break;
-				
-				case 2://obstacle
+					break;
+
+				case 6:
 					fill('grey');
-				break;
-				
-				case 3://player
-					fill('blue');
-				break;
+					break;
 			}
 			rect(y * side, x * side, side, side);
 		}
 	}
+	fill("white");
+	rect(side / 4, side / 4, side / 2, side / 2);
+	rect(matrixSize - 1 - (0.75 * side), side / 4, side / 2, side / 2);
+	rect(matrixSize - 1 - (0.75 * side), matrixSize - 1 - (0.75 * side), side / 2, side / 2);
+	rect(size / 4, matrixSize - 1 - (0.75 * side), side / 2, side / 2);
 }
