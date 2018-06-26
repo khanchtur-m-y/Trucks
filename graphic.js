@@ -17,7 +17,7 @@ function setup() {
 function draw() {
 	for (var y = 0; y < matrixSize; y++) {
 		for (var x = 0; x < matrixSize; x++) {
-			switch (matrixClient[y][x]) {
+			switch (/* matrix */) {
 				case 0:
 					fill('red');
 					break;
