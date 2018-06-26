@@ -1,7 +1,5 @@
-var matrixClient = [];
 var side = 24;
 var matrixSize = 24;
-var p = document.getElementById("pWait");
 
 function setup() {
 	for(var i = 0; i < matrixSize; i++){
